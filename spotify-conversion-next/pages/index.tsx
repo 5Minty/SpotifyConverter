@@ -1,34 +1,47 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import * as React from 'react'
-import { Box, Button, ChakraProvider, Input, Text, VStack } from '@chakra-ui/react'
-import {useRef} from 'react';
-import {useState} from 'react';
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
+import * as React from "react";
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { useRef } from "react";
+import { useState } from "react";
+import { stringify } from "querystring";
+import { useForm } from "react-hook-form";
 
-const songs = [{
-  id: 1, name: "goosebumps", isOnAppleMusic: true},
-  {id: 2, name: "funky jesus", isOnAppleMusic: false}
-]
+const songs = [
+  {
+    id: 1,
+    name: "goosebumps",
+    isOnAppleMusic: true,
+  },
+  { id: 2, name: "funky jesus", isOnAppleMusic: false },
+];
 
-export default function Home(){ //export default function normally
-  //const [message, setMessage] = useState('');
-  let playlistLinkRef = useRef(null);
+type SpotifyFormFields = {
+  playlistLink: string;
+  playlistName: string;
+};
 
-  const [numSongs, setNumSongs] = React.useState(0);
+export default function Home() {
+  //export default function normally
 
-  function convertClick(){
-    setNumSongs(numSongs + 1);
-    alert('Your link is ' + playlistLinkRef.current);
-  }
-  
+  const { register, handleSubmit } = useForm();
 
-  // const handleChange = (event: { target: { value: React.SetStateAction<string> } }) => {
-  //   setMessage(event.target.value);
-
-  //   console.log('value is:', event.target.value)
-  // }
+  const onSubmit = (d: any) => {
+    const data = d as SpotifyFormFields; //Type casting
+    console.log(data.playlistLink);
+    console.log(data.playlistName);
+  };
 
   const listSongs = songs.map(
     (
@@ -43,9 +56,9 @@ export default function Home(){ //export default function normally
         {song.name}
       </li> //song.name also in brackets because it's found outside of the function
     )
-
   );
   return (
+    //front end
     <ChakraProvider>
       <Box bgColor={"black"} boxShadow="xl">
         <Text py={"5"} px="5" color={"white"}>
@@ -53,32 +66,27 @@ export default function Home(){ //export default function normally
         </Text>
       </Box>
       <Box px={"500"}>
-        
         <VStack>
+          <Text py={"5"}>Paste a playlist link here!</Text>
 
-        <Text py={"5"}>
-          Paste a playlist link here!
-        </Text>
-        <Input ref={playlistLinkRef}>
-        </Input>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl>
+              <FormLabel>Convert Playlist</FormLabel>
+              <Input {...register("playlistLink")}></Input>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Playlist Name</FormLabel>
+              <Input {...register("playlistName")}></Input>
+            </FormControl>
+            <Button mt={4} colorScheme="teal" type="submit">
+              Submit
+            </Button>
+          </form>
 
-        <Button onClick={convertClick}>
-          Convert Playlist
-        </Button>
-        <Text>
-          Button clicked {numSongs} times
-          {/* Message: {message} */}
-        </Text>
-        <Text>
-          {listSongs}
-          
-        </Text>
-        <Box>
-          
-        </Box>
+          <Text>{listSongs}</Text>
+          <Box></Box>
         </VStack>
-        
       </Box>
     </ChakraProvider>
-  )
+  );
 }
