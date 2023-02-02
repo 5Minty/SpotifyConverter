@@ -15,7 +15,7 @@ export default function User() {
 
     const fetchUser = async () => {
       //async function means it's going on somewhere else, not in this file
-      const response = await fetch(`/api/users/${id}`, {
+      const response = await fetch(`/api/names/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

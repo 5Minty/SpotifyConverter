@@ -70,7 +70,7 @@ export default function Home({ data }) {
   );
   return (
     //front end
-    <ChakraProvider>
+    <Box>
       <Box bgColor={"black"} boxShadow="xl">
         <Text py={"5"} px="5" color={"white"}>
           Spotify Playlist Converter
@@ -98,6 +98,6 @@ export default function Home({ data }) {
           <Box></Box>
         </VStack>
       </Box>
-    </ChakraProvider>
+    </Box>
   );
 }
