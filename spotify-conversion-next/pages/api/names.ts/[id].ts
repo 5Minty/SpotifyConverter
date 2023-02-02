@@ -23,7 +23,6 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
   res.json({
     //Why json?
-    ...names.find((name) => name.id === parseInt(id)),
+    ...names.find((name) => name.id === parseInt(id as string)),
   });
-  //res.status(200).json({ name: "John Doe" }); //Why status 200?
 };

@@ -32,9 +32,20 @@ type SpotifyFormFields = {
   playlistName: string;
 };
 
-export default function Home() {
-  //export default function normally
+export async function getServerSideProps() {
+  const res = await fetch(
+    "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl"
+  );
+  const data = await res.json();
 
+  return {
+    props: { data },
+  };
+}
+
+export default function Home({ data }) {
+  //export default function normally
+  console.log("data", data);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (d: any) => {
