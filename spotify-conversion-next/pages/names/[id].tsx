@@ -53,21 +53,6 @@ export default function User() {
   };
 
   return (
-    <div>
-      <h1>User Form</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={name ?? ""} //idk what this means. Value is name or "" if undef?
-            onChange={(e) => setName(e.target.value)} //updates e on change of input
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    
   );
 }
