@@ -15,7 +15,7 @@ export default function User() {
 
     const fetchUser = async () => {
       //async function means it's going on somewhere else, not in this file
-      const response = await fetch(`/api/names/${id}`, {
+      const response = await fetch(`/api/names/${name}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -51,8 +51,4 @@ export default function User() {
     const data = await response.json();
     console.log("POST: ", data);
   };
-
-  return (
-    
-  );
 }

@@ -1,4 +1,4 @@
-import { Student } from "@/pages/api/names/[name]";
+import { Student } from "@/pages/api/names/[id]/[name]";
 import { Box, BoxProps, Card, Heading, Text } from "@chakra-ui/react";
 
 type StudentFoundProps = {

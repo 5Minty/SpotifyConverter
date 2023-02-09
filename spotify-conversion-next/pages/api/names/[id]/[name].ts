@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export type Student = {
   id: number;
-  name: string;
+  fname: string;
 };
 
 export type StudentResponse = {
@@ -16,11 +16,11 @@ export type StudentResponse = {
 const STUDENTS = [
   {
     id: 1,
-    name: "Joe",
+    fname: "Joe",
   },
   {
     id: 2,
-    name: "Sam",
+    fname: "Sam",
   },
 ];
 
@@ -33,18 +33,37 @@ export default async function handler(
   res: NextApiResponse<StudentResponse>
 ) {
   // get the name that we passed in
-  const { name } = req.query;
 
-  console.log(name);
+  console.log(req.query);
+
+  const id = req.query["id"];
+  const name = req.query["name"];
+
+  console.log(id, name);
+
+  //if we didn't split up the parameters
+  // const id = req?.query?.substring()
 
   switch (req.method) {
     case "GET":
-      const foundStudent = STUDENTS.find((p) => p.name == name);
+      const foundStudent = STUDENTS.find((p) => p.fname == name);
+      //const foundStudentID = STUDENTS.find((p) => p.id == id); The line above finds the whole object by the fname so i dont need an id too
+
+      console.log("Found Student: " + foundStudent?.fname);
+      console.log("Found Student ID: " + foundStudent?.id);
+
       if (foundStudent) {
-        res.status(200).json({
-          student: foundStudent,
-          message: "Student retrieved successfully.",
-        });
+        console.log(foundStudent.id, id);
+        if (`${foundStudent.id}` == id) {
+          res.status(200).json({
+            student: foundStudent,
+            message: "Student retrieved successfully.",
+          });
+        } else {
+          res.status(400).json({
+            message: `Unable to find student with name "${name}" and ID "${id}"`,
+          });
+        }
       } else {
         res.status(400).json({
           message: `Unable to find student with name "${name}"`,

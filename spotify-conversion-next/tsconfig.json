@@ -24,7 +24,9 @@
     "**/*.ts",
     "**/*.tsx",
     "pages/api/spotifyPlaylistLink.jsx",
-    "pages/api/spotifyPlaylistLink.js"
+    "pages/api/spotifyPlaylistLink.js",
+    "pages/api/names",
+    "pages/api/authorization_code"
   ],
   "exclude": ["node_modules"]
 }

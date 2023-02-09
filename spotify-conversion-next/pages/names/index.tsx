@@ -15,12 +15,13 @@ import * as React from "react";
 import { useState } from "react";
 // USE THIS FOR FORM SUBMISSION EVERY TIME IN NEXT, IT'S CRACKED
 import { useForm } from "react-hook-form";
-import { Student, StudentResponse } from "../api/names/[name]";
+import { Student, StudentResponse } from "../api/names/[id]/[name]";
 
 export type NamesProps = {};
 
 type NameForm = {
   name: string;
+  id: number;
 };
 
 const Names: NextPage<NamesProps> = () => {
@@ -33,33 +34,36 @@ const Names: NextPage<NamesProps> = () => {
     // in this case, we're just submitting a type with 1 "name" string value
     defaultValues: {
       name: "",
+      id: 0,
     },
   });
 
   // the parameter to this method will have the same properties as our "defaultValues" above
   const onSubmit = async (data: NameForm) => {
-    // console.log("Data: ", data);
+    console.log("Data: ", data);
     // Okay, so the submit button has been clicked and we have our form data in "data"
     // Call our API and pass in the name we submitted, and get the response
     /*
       <------YOUR CODE WILL GO HERE, UNCOMMENT THE REST AS YOU GO------->
-    */
-    // console.log("Response: ", response);
+      */
+    const res = await fetch(`/api/names/${data.id}/${data.name}`);
+
+    console.log("Response: ", res);
     // Okay... so now to get the response ".json()" object we wanted to send back, do:
     // And of course, we type check here :)
-    // const studentRes = (await response.json()) as StudentResponse;
-    // console.log(studentRes);
-    // if (studentRes) {
-    //   // OKAY, FINALLY... set our react state hook for "student" to the student retrieved
-    //   setStudent(studentRes.student);
-    //   toast({
-    //     title: "Nice job toggaf.",
-    //     description: "Now do the second part of the task.",
-    //     status: "success",
-    //     duration: 9000,
-    //     isClosable: true,
-    //   });
-    // }
+    const studentRes = (await res.json()) as StudentResponse;
+    console.log(studentRes);
+    if (studentRes) {
+      //   // OKAY, FINALLY... set our react state hook for "student" to the student retrieved
+      setStudent(studentRes.student);
+      toast({
+        title: "Nice job toggaf.",
+        description: "Now do the second part of the task.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
@@ -93,6 +97,12 @@ const Names: NextPage<NamesProps> = () => {
                   required: "Please enter a name you'd like to check.",
                 })}
                 placeholder="Name you would like to search with API"
+              />
+              <Input
+                {...register("id", {
+                  required: "Please enter an ID you'd like to check.",
+                })}
+                placeholder="ID you would like to search with API"
               />
             </FormControl>
             <Button type="submit" mt={4}>
