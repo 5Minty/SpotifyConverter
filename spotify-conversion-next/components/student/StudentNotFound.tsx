@@ -1,15 +1,15 @@
 import { Student } from "@/pages/api/names/[id]/[name]";
 import { Box, BoxProps, Card, Heading, Text } from "@chakra-ui/react";
 
-type StudentFoundProps = {
-  student: Student;
+type StudentNotFoundProps = {
+  student?: Student;
   rootProps?: BoxProps;
 };
 
 // This is a custom component! I made it in hopes that you would find it and see what's happening here.
 // Look at custom component documentation, then come back and look at how this works. Very good for large
 // projects where you have lots of reusable parts on multiple pages!
-export const StudentFound = (props: StudentFoundProps) => {
+export const StudentNotFound = (props: StudentNotFoundProps) => {
   const { student, ...rootProps } = props;
 
   return (
@@ -20,10 +20,7 @@ export const StudentFound = (props: StudentFoundProps) => {
       w="50%"
       {...rootProps}
     >
-      <>
-        We found the student with the name {student?.fname} and ID:{" "}
-        {student?.id}{" "}
-      </>
+      <>We couldn't find a student with that name and ID </>
       <Heading mt={4}>Part 2:</Heading>
       <Text>
         Ok good... add a SECOND form field for ID. Same functionality, but we
@@ -35,4 +32,4 @@ export const StudentFound = (props: StudentFoundProps) => {
   );
 };
 
-export default StudentFound;
+export default StudentNotFound;

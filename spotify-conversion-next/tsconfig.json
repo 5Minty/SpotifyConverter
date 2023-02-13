@@ -26,7 +26,7 @@
     "pages/api/spotifyPlaylistLink.jsx",
     "pages/api/spotifyPlaylistLink.js",
     "pages/api/names",
-    "pages/api/authorization_code"
+    "pages/authorization_code"
   ],
   "exclude": ["node_modules"]
 }

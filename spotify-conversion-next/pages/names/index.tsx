@@ -1,4 +1,4 @@
-import { StudentFound } from "@/components";
+import { StudentFound, StudentNotFound } from "@/components";
 import {
   Box,
   Button,
@@ -57,7 +57,7 @@ const Names: NextPage<NamesProps> = () => {
       //   // OKAY, FINALLY... set our react state hook for "student" to the student retrieved
       setStudent(studentRes.student);
       toast({
-        title: "Nice job toggaf.",
+        title: "Nice job.",
         description: "Now do the second part of the task.",
         status: "success",
         duration: 9000,
@@ -111,6 +111,7 @@ const Names: NextPage<NamesProps> = () => {
 
             {/*This syntax means "If student is not null, then display this thing"*/}
             {student && <StudentFound student={student} />}
+            {!student && <StudentNotFound />}
           </form>
         </Box>
       </Box>
