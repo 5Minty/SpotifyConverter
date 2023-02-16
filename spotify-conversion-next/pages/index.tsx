@@ -42,7 +42,7 @@ const Home: NextPage<HomeProps> = () => {
 
   const login = async () => {
     //call our API page (which will redirect to spotify...)
-    const response = await spotifyQueries.login();
+    const response = await spotifyQueries.spotifyLogin();
     console.log(response);
   };
 

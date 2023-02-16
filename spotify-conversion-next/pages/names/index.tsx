@@ -47,6 +47,7 @@ const Names: NextPage<NamesProps> = () => {
       <------YOUR CODE WILL GO HERE, UNCOMMENT THE REST AS YOU GO------->
       */
     const res = await fetch(`/api/names/${data.id}/${data.name}`);
+    console.log(res);
 
     console.log("Response: ", res);
     // Okay... so now to get the response ".json()" object we wanted to send back, do:
