@@ -10,6 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { NextPage } from "next";
+import Link from "next/link";
+import login from "./api/login";
+import spotifyQueries from "@/services/spotify/spotifyQueries";
 
 type SpotifyFormFields = {
   playlistLink: string;
@@ -37,6 +40,12 @@ const Home: NextPage<HomeProps> = () => {
     console.log(data.playlistName);
   };
 
+  const login = async () => {
+    //call our API page (which will redirect to spotify...)
+    const response = await spotifyQueries.login();
+    console.log(response);
+  };
+
   return (
     //front end
     <Box>
@@ -61,6 +70,7 @@ const Home: NextPage<HomeProps> = () => {
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>
+            <Button onClick={() => login()}>Login with Spotify</Button>
           </form>
           <Box></Box>
         </VStack>
