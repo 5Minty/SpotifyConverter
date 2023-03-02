@@ -19,16 +19,22 @@ type SpotifyFormFields = {
   playlistName: string;
 };
 
-export async function getServerSideProps() {
-  const res = await fetch(
-    "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl"
-  );
-  const data = await res.json();
+// TODO: Add these to a .env.local file
+const SPOTIFY_REDIRECT_URI = "http://localhost:3000/spotify-callback/";
+const SPOTIFY_SECRET = "5ff7e5b8b9c24237afed36bece1af9fc";
+const SPOTIFY_ID = "b1263098ab4b4da7911e4c3c55f6621e";
 
-  return {
-    props: { data },
-  };
-}
+// export async function getServerSideProps() {
+//   const res = await fetch(
+//     "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl"
+
+//   );
+//   const data = await res.json();
+
+//   return {
+//     props: { data },
+//   };
+// }
 
 type HomeProps = {};
 const Home: NextPage<HomeProps> = () => {
@@ -36,14 +42,21 @@ const Home: NextPage<HomeProps> = () => {
 
   const onSubmit = (d: any) => {
     const data = d as SpotifyFormFields; //Type casting
-    console.log(data.playlistLink);
-    console.log(data.playlistName);
   };
 
-  const login = async () => {
-    //call our API page (which will redirect to spotify...)
-    const response = await spotifyQueries.login();
-    console.log(response);
+  const getSpotifyAuthLink = () => {
+    const requestURL = new URL("https://accounts.spotify.com/authorize?");
+    requestURL.searchParams.append("response_type", "code");
+    requestURL.searchParams.append("client_id", SPOTIFY_ID);
+    requestURL.searchParams.append(
+      "scope",
+      `user-read-private user-read-email`
+    );
+    requestURL.searchParams.append("redirect_uri", SPOTIFY_REDIRECT_URI);
+
+    console.log(requestURL);
+
+    return requestURL.toString();
   };
 
   return (
@@ -70,7 +83,9 @@ const Home: NextPage<HomeProps> = () => {
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>
-            <Button onClick={() => login()}>Login with Spotify</Button>
+            <Link href={`${getSpotifyAuthLink()}`}>
+              <Button>Login with Spotify</Button>
+            </Link>
           </form>
           <Box></Box>
         </VStack>

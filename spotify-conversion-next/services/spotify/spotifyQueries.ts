@@ -1,7 +1,13 @@
-async function login(): Promise<unknown> {
-  const response = await fetch(`/api/login`); //CORS issue
+async function login(): Promise<any> {
+  const reqOptions = {
+    headers: {},
+  };
 
-  console.log(response);
+  // console.log(reqOptions);
+
+  const response = await fetch(`/api/login`, { mode: "no-cors" }); //CORS issue
+  // const data = await response.json;
+  // console.log("Query response:" + data);
 
   return response;
 }

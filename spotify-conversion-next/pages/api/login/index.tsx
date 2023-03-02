@@ -1,23 +1,18 @@
-import { useRangeSlider } from "@chakra-ui/react";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
-
-const SPOTIFY_REDIRECT_URI = "http://localhost:3000/spotify-callback/";
-const SPOTIFY_SECRET = "5ff7e5b8b9c24237afed36bece1af9fc";
-const SPOTIFY_ID = "b1263098ab4b4da7911e4c3c55f6621e";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<any> {
-  //const response = await login();//call server side login
-
-  const requestURL = new URL("https://accounts.spotify.com/authorize?");
-  requestURL.searchParams.append("response_type", "code");
-  requestURL.searchParams.append("client_id", SPOTIFY_ID);
-  requestURL.searchParams.append("scope", `user-read-private user-read-email`);
-  requestURL.searchParams.append("redirect_uri", SPOTIFY_REDIRECT_URI);
-
-  console.log(`${requestURL}`);
-  res.redirect(`${requestURL}`);
+  // const reqOptions = {
+  //   headers: { "Access-Control-Allow-Origin": "http://localhost:3000" },
+  // };
+  //const response = await login(); //call server side login
+  // console.log(`Request URL: ${requestURL}`);
+  // const response = new Request(requestURL, {
+  //   method: "GET",
+  // });
+  // res.redirect(`${requestURL}`);
+  // console.log("Response: ", response);
+  // res.status(200).json()
 }
