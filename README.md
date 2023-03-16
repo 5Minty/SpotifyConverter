@@ -12,6 +12,7 @@ SPOTIFY_SECRET=<your_spotify_client_secret_key>
 SPOTIFY_REDIRECT_URI=<your_spotify_auth_redirect_uri>
 NEXTAUTH_URL=http://localhost:3000 (or whatever your website's base URL is)
 ```
+Next, make sure to install the packages for the project by running `npm install` while in the directory `./spotify-conversion-next`
 
 Then, you're all set to run the development server:
 
