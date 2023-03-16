@@ -44,7 +44,7 @@ const Home: NextPage<HomeProps> = () => {
     const data = d as SpotifyFormFields; //Type casting
   };
 
-  const getSpotifyAuthLink = () => {
+  const login = () => {
     const requestURL = new URL("https://accounts.spotify.com/authorize?");
     requestURL.searchParams.append("response_type", "code");
     requestURL.searchParams.append("client_id", SPOTIFY_ID);
@@ -83,7 +83,7 @@ const Home: NextPage<HomeProps> = () => {
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>
-            <Link href={`${getSpotifyAuthLink()}`}>
+            <Link href={`${login()}`}>
               <Button>Login with Spotify</Button>
             </Link>
           </form>
