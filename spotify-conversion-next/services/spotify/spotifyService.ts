@@ -1,3 +1,5 @@
+import spotifyRoutes from "./spotifyRoutes";
+
 //Queries is local and service is server
 const querystring = require("node:querystring");
 
@@ -16,18 +18,12 @@ const myHeaders = new Headers({
   "Content-Type": "application/x-www-form-urlencoded",
 });
 
-export const login = async () => {
-  const request = new Request(`https://accounts.spotify.com/authorize?`);
-};
-
 export const getSpotifyAuthToken = async (code: string) => {
-  const requestUrl = new URL(`https://accounts.spotify.com/api/token`);
-
-  const request = new Request(requestUrl, {
+  const request = new Request(spotifyRoutes.getSpotifyAccessToken, {
     headers: myHeaders,
     method: "POST",
     body: querystring.stringify({
-      redirect_uri: "http://localhost:3000/spotify-callback",
+      redirect_uri: `${process.env.SPOTIFY_REDIRECT_URI}`,
       code: `${code}`,
       grant_type: "authorization_code",
     }),

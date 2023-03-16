@@ -13,28 +13,18 @@ import { NextPage } from "next";
 import Link from "next/link";
 import login from "./api/login";
 import spotifyQueries from "@/services/spotify/spotifyQueries";
+import spotifyRoutes from "@/services/spotify/spotifyRoutes";
 
 type SpotifyFormFields = {
   playlistLink: string;
   playlistName: string;
 };
 
-// TODO: Add these to a .env.local file
-const SPOTIFY_REDIRECT_URI = "http://localhost:3000/spotify-callback";
-const SPOTIFY_SECRET = "f34151afa39f4c10b933a89e7be957bf";
-const SPOTIFY_ID = "6b6e2db4d7984ece996ab3cba807a937";
-
-// export async function getServerSideProps() {
-//   const res = await fetch(
-//     "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl"
-
-//   );
-//   const data = await res.json();
-
-//   return {
-//     props: { data },
-//   };
-// }
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 
 type HomeProps = {};
 const Home: NextPage<HomeProps> = () => {
@@ -42,21 +32,6 @@ const Home: NextPage<HomeProps> = () => {
 
   const onSubmit = (d: any) => {
     const data = d as SpotifyFormFields; //Type casting
-  };
-
-  const login = () => {
-    const requestURL = new URL("https://accounts.spotify.com/authorize?");
-    requestURL.searchParams.append("response_type", "code");
-    requestURL.searchParams.append("client_id", SPOTIFY_ID);
-    requestURL.searchParams.append(
-      "scope",
-      `user-read-private user-read-email`
-    );
-    requestURL.searchParams.append("redirect_uri", SPOTIFY_REDIRECT_URI);
-
-    console.log(requestURL);
-
-    return requestURL.toString();
   };
 
   return (
@@ -83,7 +58,7 @@ const Home: NextPage<HomeProps> = () => {
             <Button mt={4} colorScheme="teal" type="submit">
               Submit
             </Button>
-            <Link href={`${login()}`}>
+            <Link href={`${spotifyRoutes.redirectLogin}`}>
               <Button>Login with Spotify</Button>
             </Link>
           </form>

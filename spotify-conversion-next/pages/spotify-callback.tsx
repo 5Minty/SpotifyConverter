@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<
   const response = await getSpotifyAuthToken(code); // get the whole token response object
   const refreshToken = response.refresh_token;
 
-  console.log(`Refresh Token: ${refreshToken}`);
+  // console.log(`Refresh Token: ${refreshToken}`);
 
   return {
     props: { code, refreshToken }, // pass along refreshToken to the page below
