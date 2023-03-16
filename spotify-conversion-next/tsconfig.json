@@ -19,6 +19,14 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/api/spotifyPlaylistLink.jsx",
+    "pages/api/spotifyPlaylistLink.js",
+    "pages/api/names",
+    "pages/authorization_code"
+  ],
   "exclude": ["node_modules"]
 }
