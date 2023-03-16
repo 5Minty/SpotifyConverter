@@ -20,9 +20,9 @@ type SpotifyFormFields = {
 };
 
 // TODO: Add these to a .env.local file
-const SPOTIFY_REDIRECT_URI = "http://localhost:3000/spotify-callback/";
-const SPOTIFY_SECRET = "5ff7e5b8b9c24237afed36bece1af9fc";
-const SPOTIFY_ID = "b1263098ab4b4da7911e4c3c55f6621e";
+const SPOTIFY_REDIRECT_URI = "http://localhost:3000/spotify-callback";
+const SPOTIFY_SECRET = "f34151afa39f4c10b933a89e7be957bf";
+const SPOTIFY_ID = "6b6e2db4d7984ece996ab3cba807a937";
 
 // export async function getServerSideProps() {
 //   const res = await fetch(
