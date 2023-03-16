@@ -7,9 +7,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Since this application uses the Spotify API and is in its preliminary stages, you will need to enter account-specific API keys into a .env.local file for local development and testing. Your .env.local file should go in the `spotify-conversion-next` folder and should look like this:
 
 ```
-SPOTIFY_ID = <your_spotify_client_id>
-SPOTIFY_SECRET = <your_spotify_client_secret_key>
-SPOTIFY_REDIRECT_URI = <your_spotify_auth_redirect_uri> ()
+SPOTIFY_ID=<your_spotify_client_id>
+SPOTIFY_SECRET=<your_spotify_client_secret_key>
+SPOTIFY_REDIRECT_URI=<your_spotify_auth_redirect_uri>
+NEXTAUTH_URL=http://localhost:3000 (or whatever your website's base URL is)
 ```
 
 Then, you're all set to run the development server:
