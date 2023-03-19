@@ -13,83 +13,50 @@ import { NextPage } from "next";
 import Link from "next/link";
 import login from "./api/login";
 import spotifyQueries from "@/services/spotify/spotifyQueries";
+import spotifyRoutes from "@/services/spotify/spotifyRoutes";
+import { useSession } from "next-auth/react";
 
 type SpotifyFormFields = {
   playlistLink: string;
   playlistName: string;
 };
 
-// TODO: Add these to a .env.local file
-const SPOTIFY_REDIRECT_URI = "http://localhost:3000/spotify-callback/";
-const SPOTIFY_SECRET = "5ff7e5b8b9c24237afed36bece1af9fc";
-const SPOTIFY_ID = "b1263098ab4b4da7911e4c3c55f6621e";
-
-// export async function getServerSideProps() {
-//   const res = await fetch(
-//     "https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl"
-
-//   );
-//   const data = await res.json();
-
-//   return {
-//     props: { data },
-//   };
-// }
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}
 
 type HomeProps = {};
 const Home: NextPage<HomeProps> = () => {
   const { register, handleSubmit } = useForm();
+  const { data: session } = useSession();
 
   const onSubmit = (d: any) => {
     const data = d as SpotifyFormFields; //Type casting
   };
 
-  const getSpotifyAuthLink = () => {
-    const requestURL = new URL("https://accounts.spotify.com/authorize?");
-    requestURL.searchParams.append("response_type", "code");
-    requestURL.searchParams.append("client_id", SPOTIFY_ID);
-    requestURL.searchParams.append(
-      "scope",
-      `user-read-private user-read-email`
-    );
-    requestURL.searchParams.append("redirect_uri", SPOTIFY_REDIRECT_URI);
-
-    console.log(requestURL);
-
-    return requestURL.toString();
-  };
-
   return (
     //front end
     <Box>
-      <Box bgColor={"black"} boxShadow="xl">
-        <Text py={"5"} px="5" color={"white"}>
-          Spotify Playlist Converter
-        </Text>
-      </Box>
-      <Box px={"500"}>
-        <VStack>
-          <Text py={"5"}>Paste a playlist link here!</Text>
+      <VStack>
+        <Text py={"5"}>Paste a playlist link here!</Text>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl>
-              <FormLabel>Convert Playlist</FormLabel>
-              <Input {...register("playlistLink")}></Input>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Playlist Name</FormLabel>
-              <Input {...register("playlistName")}></Input>
-            </FormControl>
-            <Button mt={4} colorScheme="teal" type="submit">
-              Submit
-            </Button>
-            <Link href={`${getSpotifyAuthLink()}`}>
-              <Button>Login with Spotify</Button>
-            </Link>
-          </form>
-          <Box></Box>
-        </VStack>
-      </Box>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl>
+            <FormLabel>Convert Playlist</FormLabel>
+            <Input {...register("playlistLink")}></Input>
+          </FormControl>
+          <FormControl>
+            <FormLabel>Playlist Name</FormLabel>
+            <Input {...register("playlistName")}></Input>
+          </FormControl>
+          <Button mt={4} colorScheme="teal" type="submit">
+            Submit
+          </Button>
+        </form>
+        <Box></Box>
+      </VStack>
     </Box>
   );
 };

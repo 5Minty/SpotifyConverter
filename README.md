@@ -1,8 +1,20 @@
+# SpotifyConverter
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+Since this application uses the Spotify API and is in its preliminary stages, you will need to enter account-specific API keys into a .env.local file for local development and testing. Your .env.local file should go in the `spotify-conversion-next` folder and should look like this:
+
+```
+SPOTIFY_ID=<your_spotify_client_id>
+SPOTIFY_SECRET=<your_spotify_client_secret_key>
+SPOTIFY_REDIRECT_URI=<your_spotify_auth_redirect_uri>
+NEXTAUTH_URL=http://localhost:3000 (or whatever your website's base URL is)
+```
+Next, make sure to install the packages for the project by running `npm install` while in the directory `./spotify-conversion-next`
+
+Then, you're all set to run the development server:
 
 ```bash
 npm run dev
@@ -16,7 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/*](http://localhost:3000/api/*).
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
