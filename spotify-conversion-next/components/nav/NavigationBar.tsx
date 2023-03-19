@@ -21,6 +21,7 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useSession } from "next-auth/react";
 import spotifyRoutes from "@/services/spotify/spotifyRoutes";
+import { NavLink } from "./NavLink";
 
 export const NavigationBar = (props: {}) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -51,6 +52,7 @@ export const NavigationBar = (props: {}) => {
           </Box>
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
+              <NavLink href="/playlist"> Playlist Display </NavLink>
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>

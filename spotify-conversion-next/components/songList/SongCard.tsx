@@ -1,8 +1,14 @@
 import { Card, Heading } from "@chakra-ui/react";
-import { Song } from "./SongList";
 
 type SongCardProps = {
   song: Song;
+};
+
+export type Song = {
+  name: string;
+  length: number;
+  artist: string;
+  album: string;
 };
 
 export const SongCard = (props: SongCardProps) => {
